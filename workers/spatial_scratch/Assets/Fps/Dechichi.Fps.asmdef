@@ -1,0 +1,15 @@
+{
+    "name": "Dechichi.Fps",
+    "references": [
+        "Improbable.Gdk.Core",
+        "Improbable.Gdk.Generated"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
