@@ -6,6 +6,9 @@ namespace Fps.Common
 {
     public class ClientWorkerConnector : WorkerConnectorBase
     {
+        private const string AuthPlayer = "Prefabs/UnityClient/Authoritative/Player";
+        private const string NonAuthPlayer = "Prefabs/UnityClient/NonAuthoritative/Player";
+
         protected override string GetWorkerType()
         {
             return WorkerUtils.UnityClient;
@@ -13,12 +16,17 @@ namespace Fps.Common
 
         protected override void HandleWorkerConnectionEstablished()
         {
-            Debug.Log("Client connected successfully");
             var world = Worker.World;
 
             PlayerLifecycleHelper.AddClientSystems(world);
 
-            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
+            var fallback = new GameObjectCreatorFromMetadata(Worker.WorkerId, Worker.Origin, Worker.LogDispatcher);
+
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(
+                world,
+                new AdvancedEntityCreationPipeline(
+                    Worker, EntityUtils.PlayerEntityType, AuthPlayer, NonAuthPlayer, fallback),
+                gameObject);
 
             base.HandleWorkerConnectionEstablished();
         }
