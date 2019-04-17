@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
+using Improbable.Gdk.GameObjectCreation;
+using Improbable.Gdk.PlayerLifecycle;
 
 namespace Fps.Common
 {
@@ -17,6 +14,12 @@ namespace Fps.Common
         protected override void HandleWorkerConnectionEstablished()
         {
             Debug.Log("Client connected successfully");
+            var world = Worker.World;
+
+            PlayerLifecycleHelper.AddClientSystems(world);
+
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
+
             base.HandleWorkerConnectionEstablished();
         }
 

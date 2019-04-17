@@ -9,4 +9,9 @@ namespace Fps.Common
         public const string UnityGameLogic = "UnityGameLogic";
         public const string UnityClient = "UnityClient";
     }
+
+    public static class EntityUtils
+    {
+        public const string PlayerEntityType = "Player";
+    }
 }
