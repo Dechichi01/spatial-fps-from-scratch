@@ -2,6 +2,55 @@
 
 6from_gdk_packages/com.improbable.gdk.core/common.protoschema.improbable.commonimprobable/entity_state.proto"
 EmptyBBCommonOuterClass
+Ğ
+>from_gdk_packages/com.improbable.gdk.health/health-regen.protoschema.improbable.gdk.healthimprobable/entity_state.proto"ì
+HealthRegenComponentData5
+field1_damaged_recently (BÂódamaged_recently=
+field2_regen_cooldown_timer (BÂóregen_cooldown_timerA
+field3_cooldown_sync_interval (BÂócooldown_sync_interval5
+field4_regen_pause_time (BÂóregen_pause_time1
+field5_regen_interval (BÂóregen_interval-
+field6_regen_amount (BÂóregen_amount"Ç
+HealthRegenComponent
+Events
+
+Commands2t
+component_extension.schema.improbable.EntityStateù (26.schema.improbable.gdk.health.HealthRegenComponentData2s
+event_extension.schema.improbable.EntityEventù (29.schema.improbable.gdk.health.HealthRegenComponent.Events2y
+command_extension .schema.improbable.EntityCommandù (2;.schema.improbable.gdk.health.HealthRegenComponent.Commands:3Âó/
+*improbable.gdk.health.HealthRegenComponentùBBHealth-regenOuterClass
+İ
+8from_gdk_packages/com.improbable.gdk.health/health.protoschema.improbable.gdk.healthimprobable/entity_state.proto6from_gdk_packages/com.improbable.gdk.core/common.protoFfrom_gdk_packages/com.improbable.gdk.standardtypes/standardtypes.proto"
+HealthModifier
+field1_type (BÂótype!
+field2_amount (B
+Âóamountg
+field3_applied_location (20.schema.improbable.gdk.standardtypes.IntAbsoluteBÂóapplied_locationS
+field4_origin (20.schema.improbable.gdk.standardtypes.IntAbsoluteB
+Âóorigin"è
+HealthModifiedInfoS
+field1_modifier (2,.schema.improbable.gdk.health.HealthModifierBÂómodifier/
+field2_health_before (BÂóhealth_before-
+field3_health_after (BÂóhealth_after
+field4_died (BÂódied"c
+HealthComponentData!
+field1_health (B
+Âóhealth)
+field2_max_health (BÂó
+max_health"ì
+HealthComponent‘
+EventsO
+event_health_modified (20.schema.improbable.gdk.health.HealthModifiedInfo6
+event_respawn (2.schema.improbable.common.Empty½
+CommandsS
+command_modify_health_request (2,.schema.improbable.gdk.health.HealthModifierG
+command_modify_health_response (2.schema.improbable.common.EmptyH
+command_request_respawn_request (2.schema.improbable.common.EmptyI
+ command_request_respawn_response (2.schema.improbable.common.Empty2o
+component_extension.schema.improbable.EntityStateø (21.schema.improbable.gdk.health.HealthComponentData2n
+event_extension.schema.improbable.EntityEventø (24.schema.improbable.gdk.health.HealthComponent.Events2t
+command_extension .schema.improbable.EntityCommandø (26.schema.improbable.gdk.health.HealthComponent.Commands:.Âó*
+%improbable.gdk.health.HealthComponentøBBHealthOuterClass
 
 Hfrom_gdk_packages/com.improbable.gdk.playerlifecycle/owning_worker.proto"schema.improbable.player_lifecycleimprobable/entity_state.proto";
 OwningWorkerData'
@@ -51,6 +100,16 @@ Kfrom_gdk_packages/com.improbable.gdk.playerlifecycle/player_heartbeat.proto"sc
 event_extension.schema.improbable.EntityEventÊe (2@.schema.improbable.player_lifecycle.PlayerHeartbeatServer.Events2€
 command_extension .schema.improbable.EntityCommandÊe (2B.schema.improbable.player_lifecycle.PlayerHeartbeatServer.Commands::Âó6
 1improbable.player_lifecycle.PlayerHeartbeatServerÊeBBPlayerHeartbeatOuterClass
+Ø
+Ffrom_gdk_packages/com.improbable.gdk.standardtypes/standardtypes.proto#schema.improbable.gdk.standardtypesimprobable/entity_state.proto"U
+IntDelta
+field1_x (BÂóx
+field2_y (BÂóy
+field3_z (BÂóz"X
+IntAbsolute
+field1_x (BÂóx
+field2_y (BÂóy
+field3_z (BÂózBBStandardtypesOuterClass
 ö	
 Vfrom_gdk_packages/com.improbable.gdk.transformsynchronization/transform_internal.protoschema.improbable.transformimprobable/entity_state.proto"U
 Location
