@@ -6,7 +6,8 @@
         "Improbable.Gdk.GameObjectCreation",
         "Improbable.Gdk.PlayerLifecycle",
         "Unity.Entities",
-        "Improbable.Gdk.StandardTypes"
+        "Improbable.Gdk.StandardTypes",
+        "Improbable.Gdk.Health"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

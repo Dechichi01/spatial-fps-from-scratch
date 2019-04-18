@@ -18,15 +18,7 @@ namespace Fps.Common
         {
             var world = Worker.World;
 
-            PlayerLifecycleHelper.AddClientSystems(world);
-
-            var fallback = new GameObjectCreatorFromMetadata(Worker.WorkerId, Worker.Origin, Worker.LogDispatcher);
-
-            GameObjectCreationHelper.EnableStandardGameObjectCreation(
-                world,
-                new AdvancedEntityCreationPipeline(
-                    Worker, EntityUtils.PlayerEntityType, AuthPlayer, NonAuthPlayer, fallback),
-                gameObject);
+            ConfigurePlayerLifeCycle(world);
 
             base.HandleWorkerConnectionEstablished();
         }
@@ -35,6 +27,20 @@ namespace Fps.Common
         {
             Debug.LogError("Client: Failed to connect");
             base.HandleWorkerConnectionFailure(errorMessage);
+        }
+
+        private void ConfigurePlayerLifeCycle(Unity.Entities.World world)
+        {
+            PlayerLifecycleHelper.AddClientSystems(world);
+            world.GetOrCreateManager<HandlePlayerHeartbeatRequestSystem>();
+
+            var fallback = new GameObjectCreatorFromMetadata(Worker.WorkerId, Worker.Origin, Worker.LogDispatcher);
+
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(
+                world,
+                new AdvancedEntityCreationPipeline(
+                    Worker, EntityUtils.PlayerEntityType, AuthPlayer, NonAuthPlayer, fallback),
+                gameObject);
         }
     }
 }

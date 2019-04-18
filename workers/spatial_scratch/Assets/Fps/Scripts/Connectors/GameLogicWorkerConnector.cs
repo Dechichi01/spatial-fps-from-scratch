@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
+using Improbable.Gdk.Health;
 
 namespace Fps.Common
 {
@@ -16,12 +17,22 @@ namespace Fps.Common
             //TODO: Setup gameplay systems
             var world = Worker.World;
 
-            PlayerLifecycleHelper.AddServerSystems(world);
-
-            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
+            ConfigurePlayerLifeCycle(world);
+            ConfigureFpsSystems(world);
 
             Debug.Log("Server connected successfully");
             base.HandleWorkerConnectionEstablished();
+        }
+
+        private void ConfigurePlayerLifeCycle(Unity.Entities.World world)
+        {
+            PlayerLifecycleHelper.AddServerSystems(world);
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World);
+        }
+
+        private void ConfigureFpsSystems(Unity.Entities.World world)
+        {
+            world.GetOrCreateManager<ServerHealthModifierSystem>();
         }
     }
 }

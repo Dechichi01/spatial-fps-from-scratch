@@ -4,6 +4,7 @@ using Improbable;
 using Improbable.Gdk.PlayerLifecycle;
 using Improbable.PlayerLifecycle;
 using Improbable.Gdk.StandardTypes;
+using Improbable.Gdk.Health;
 
 namespace Fps.Common
 {
@@ -28,8 +29,12 @@ namespace Fps.Common
 
             var template = CreateDefaultEntity(EntityUtils.PlayerEntityType);
 
-            PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerType, client, WorkerUtils.UnityGameLogic);
+            var healthComp = new HealthComponent.Snapshot(
+                health: PlayerHealthConfig.MaxHealth, maxHealth: PlayerHealthConfig.MaxHealth);
 
+            template.AddComponent(healthComp, WorkerUtils.UnityGameLogic);
+
+            PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerType, client, WorkerUtils.UnityGameLogic);
             template.SetReadAccess(WorkerUtils.UnityClient, WorkerUtils.UnityGameLogic);
 
             return template;
