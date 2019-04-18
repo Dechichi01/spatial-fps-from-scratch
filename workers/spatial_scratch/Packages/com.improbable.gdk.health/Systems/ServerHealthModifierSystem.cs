@@ -13,7 +13,8 @@ namespace Improbable.Gdk.Health
             public readonly int Length;
             [ReadOnly] public EntityArray Entity;
             public ComponentDataArray<HealthComponent.Component> HealthComponents;
-            [ReadOnly] public ComponentDataArray<HealthComponent.CommandRequests.ModifyHealth> ModifyHealthRequests;
+            [ReadOnly] public ComponentDataArray<HealthComponent.CommandRequests.ModifyHealth> ModifyHealthCommandRequests;
+            public ComponentDataArray<HealthComponent.CommandResponders.ModifyHealth> ModifyHealthCommandResponders;
             public ComponentDataArray<HealthComponent.EventSender.HealthModified> HealthModifiedEventSenders;
         }
 
@@ -30,19 +31,25 @@ namespace Improbable.Gdk.Health
                     return;
                 }
 
-                var modifyHealthCommand = entitiesWithModifiedHealth.ModifyHealthRequests[i];
+                var modifyHealthCommand = entitiesWithModifiedHealth.ModifyHealthCommandRequests[i];
 
                 for (int j = 0; j < modifyHealthCommand.Requests.Count; j++)
                 {
+                    var req = modifyHealthCommand.Requests[j];
+
                     var healthModifiedInfo = HandleModifyHealthRequest(
-                         modifyHealthCommand.Requests[j].Payload, ref healthComp);
+                         req.Payload, ref healthComp);
 
                     entitiesWithModifiedHealth.HealthModifiedEventSenders[i].Events.Add(healthModifiedInfo);
 
-                    if (healthModifiedInfo.Died)
-                    {
-                        break;
-                    }
+                    entitiesWithModifiedHealth.ModifyHealthCommandResponders[i].ResponsesToSend.Add(
+                        new HealthComponent.ModifyHealth.Response(req.RequestId, new Common.Empty()));
+
+                    //Commented to always send response
+                    //if (healthModifiedInfo.Died)
+                    //{
+                    //    break;
+                    //}
                 }
 
                 entitiesWithModifiedHealth.HealthComponents[i] = healthComp;
