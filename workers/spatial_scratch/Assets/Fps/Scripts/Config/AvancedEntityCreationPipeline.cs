@@ -56,7 +56,7 @@ namespace Fps.Common
             var isPlayer = entity.GetComponent<Metadata.Component>().EntityType == playerEntityType;
             if (isPlayer)
             {
-                var go = NewGameObjectFromPrefab(cachedNonAuthPlayerPrefab, entity, worker);
+                var go = NewGameObjectFromPrefab(cachedAuthPlayerPrefab, entity, worker);
                 linker.LinkGameObjectToSpatialOSEntity(entity.SpatialOSEntityId, go, componentsToAdd);
             }
             else
