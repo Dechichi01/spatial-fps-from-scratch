@@ -32,7 +32,18 @@ namespace Fps.Common
             var healthComp = new HealthComponent.Snapshot(
                 health: PlayerHealthConfig.MaxHealth, maxHealth: PlayerHealthConfig.MaxHealth);
 
+            var healthRegenComponent = new HealthRegenComponent.Snapshot
+            {
+                CooldownSyncInterval = PlayerHealthConfig.SpatialCooldownSyncInterval,
+                DamagedRecently = false,
+                RegenAmount = PlayerHealthConfig.RegenAmount,
+                RegenCooldownTimer = PlayerHealthConfig.RegenAfterDamageCooldown,
+                RegenInterval = PlayerHealthConfig.RegenInterval,
+                RegenPauseTime = 0,
+            };
+
             template.AddComponent(healthComp, WorkerUtils.UnityGameLogic);
+            template.AddComponent(healthRegenComponent, WorkerUtils.UnityGameLogic);
 
             PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerType, client, WorkerUtils.UnityGameLogic);
             template.SetReadAccess(WorkerUtils.UnityClient, WorkerUtils.UnityGameLogic);

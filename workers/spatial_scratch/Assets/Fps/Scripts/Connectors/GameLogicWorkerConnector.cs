@@ -33,6 +33,7 @@ namespace Fps.Common
         private void ConfigureFpsSystems(Unity.Entities.World world)
         {
             world.GetOrCreateManager<ServerHealthModifierSystem>();
+            world.GetOrCreateManager<HealthRegenSystem>();
         }
     }
 }
